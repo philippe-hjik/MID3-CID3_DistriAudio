@@ -1,7 +1,7 @@
 # MID3-CID3_DistriAudio
 
-## étape 1
-Se connecter au broker MQTT avec le topic `test`
+## Étape 1
+Se connecter au broker MQTT avec le topic `test`, configurer les variables d'authentification
 ```csharp
 
 
@@ -52,3 +52,4 @@ Se connecter au broker MQTT avec le topic `test`
                 await mqttClient.SubscribeAsync(subscribeOptions);
             }
 ```
+## Étape 2
