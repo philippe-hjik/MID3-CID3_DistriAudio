@@ -12,7 +12,7 @@
 ## Info
 >[!IMPORTANT]
 >Se référer à `Tiago`, `Thomas` ou `Philippe`  concernant [Création de classes selon le type de message](#Étape-4)
->Cette étape est toujours en phase de test
+>Cette étape est toujours en phase de test aussi Les [Enumérateur selon les message](####-Enumération-des-types-de-messages)
 ## Étape 1
 Se connecter au broker MQTT avec le topic `test`, configurer les variables d'authentification
 ```csharp
@@ -108,7 +108,7 @@ mqttClient.ApplicationMessageReceivedAsync += async e =>
 };
 ```
 
-## Étape 2
+## Étape 3
 Créer un bouton pour demander des catalogues avec un message MQTT
 - Envoi le message HELLO comme demande de catalogue
 - Le fait de manière asynchrone
