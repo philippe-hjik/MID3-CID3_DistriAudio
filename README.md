@@ -152,7 +152,8 @@ Création de classes selon le type de message
 - Demander des catalogues (Faire un broadcast)
 - Envoyer son catalogue à tout le monde
 - Transférer son catalogue à une personne sur son topic
-
+>Un catalogue contient une `List<MediaData>` avec plusieurs musiques
+> Dans la dernière version suggérée, Tiago fait une double Sérialisation de son contenu (La classe Enveloppe choisi et Le message MQTT en lui même) voir : [####-Classes-Générique](####-Classes-Générique)
 #### Classes MediaData
 ```csharp
 public class MediaData
@@ -177,6 +178,7 @@ public class MediaData
 >
 
 #### Enumération des types de messages
+>Voici les différents type de message possible
 ```csharp
 public enum MessageType
 {
@@ -187,6 +189,7 @@ public enum MessageType
 ```
 
 #### Classes Générique
+>La classe contenant la list de Media (Déja Sérialisé) selon le type de message et le Message MQTT
 ```csharp
 public class GenericEnvelope
 {
@@ -202,6 +205,7 @@ public class GenericEnvelope
 ```
 
 #### Classes Enveloppes
+> Les classes enveloppe en question
 ```csharp
 public class EnveloppeEnvoieCatalogue
 {
