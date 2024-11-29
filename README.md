@@ -66,7 +66,7 @@ public async void createConnection()
 }
 ```
 ## Étape 2
-Déteter une demande de catalogue sur le topic et y répondre (toujours dans la même méthode pour l'instant)
+Détecter une demande de catalogue sur le topic et y répondre (toujours dans la même méthode pour l'instant)
 ```csharp
 
 // Callback function when a message is received
