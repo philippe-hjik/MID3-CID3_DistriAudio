@@ -102,6 +102,8 @@ mqttClient.ApplicationMessageReceivedAsync += async e =>
 
 ## Étape 2
 Créer un bouton pour demander des catalogues avec un message MQTT
+- Envoi le message HELLO comme demande de catalogue
+- Le fait de manière asynchrone
 ```csharp
 
 private async void SendData(string data)
@@ -140,3 +142,26 @@ private async void button1_Click_1(object sender, EventArgs e)
     SendData("HELLO, qui a des musiques");
 }
 ```
+
+## Étape 4
+Création de classes selon le type de message
+- Demander des catalogues (Faire un broadcast)
+- Envoyer son catalogue à tout le monde
+- Transférer son catalogue à une personne sur son topic
+
+#### Enumération des types de messages
+```csharp
+public enum MessageType
+{
+    ENVOIE_CATALOGUE,
+    ENVOIE_FICHIER,
+    DEMANDE_CATALOGUE
+}
+```
+
+#### Enumération des types de messages
+```csharp
+
+```
+
+
