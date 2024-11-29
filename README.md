@@ -11,7 +11,7 @@
 
 ## Info
 >[!IMPORTANT]
->Se référer à `Tiago`, `Thomas` ou `Moi`  concernant [Création de classes selon le type de message](#Étape-4)
+>Se référer à `Tiago`, `Thomas` ou `Philippe`  concernant [Création de classes selon le type de message](#Étape-4)
 >Cette étape est toujours en phase de test
 ## Étape 1
 Se connecter au broker MQTT avec le topic `test`, configurer les variables d'authentification
