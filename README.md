@@ -2,8 +2,12 @@
 
 ## Sommaire
 - [Se connecter au broker MQTT avec le topic `test`](#Étape-1)
+  
 - [Déteter une demande de catalogue sur le topic et y répondre](#Étape-2)
+  
 - [Créer un bouton pour demander des catalogues avec un message MQTT](#Étape-3)
+  
+- [Création de classes selon le type de message](#Étape-4)
 
 ## Étape 1
 Se connecter au broker MQTT avec le topic `test`, configurer les variables d'authentification
@@ -23,7 +27,7 @@ string username = "";
 string password = "";
 
 
-public async void creatConnection()
+public async void createConnection()
 {
 
         mqttClient = factory.CreateMqttClient();
@@ -149,19 +153,96 @@ Création de classes selon le type de message
 - Envoyer son catalogue à tout le monde
 - Transférer son catalogue à une personne sur son topic
 
+#### Classes MediaData
+```csharp
+public class MediaData
+{
+    private string _file_name;
+    private string _file_artist;
+    private string _file_type;
+    private long _file_size;
+    private string _file_duration;
+
+    public string File_name { get => _file_name; set => _file_name = value; }
+    public string File_artist { get => _file_artist; set => _file_artist = value; }
+    public string File_type { get => _file_type; set => _file_type = value; }
+    public long File_size { get => _file_size; set => _file_size = value; }
+    public string File_duration { get => _file_duration; set => _file_duration = value; }
+    
+}
+```
+#### Classes Générique
+>[!TIP]
+>La classe Générique permet de choisir entre les [classes de messages](####Enumération-des-types-de-messages)
+>
+
 #### Enumération des types de messages
 ```csharp
 public enum MessageType
 {
     ENVOIE_CATALOGUE,
-    ENVOIE_FICHIER,
-    DEMANDE_CATALOGUE
+    DEMANDE_CATALOGUE,
+    ENVOIE_FICHIER
 }
 ```
 
-#### Enumération des types de messages
+#### Classes Générique
 ```csharp
+public class GenericEnvelope
+{
+    string _senderId;
+    MessageType _messageType;
 
+    string _enveloppeJson;//classe specefique serialisee
+
+    public MessageType MessageType { get => _messageType; set => _messageType = value; }
+    public string SenderId { get => _senderId; set => _senderId = value; }
+    public string EnveloppeJson { get => _enveloppeJson; set => _enveloppeJson = value; }
+}
 ```
 
+#### Classes Enveloppes
+```csharp
+public class EnveloppeEnvoieCatalogue
+{
+    /* 
+        type 1 ENVOIE_CATALOGUE
+     */
+    private int _type;
+    private string _guid;
+    private List<MediaData> _content;
+
+    public string Guid { get => _guid; set => _guid = value; }
+    public List<MediaData> Content { get => _content; set => _content = value; }
+    public int Type { get => _type; set => _type = value; }
+}
+
+public class EnveloppeDemandeCatalogue
+{
+    /* 
+        type 2 DEMANDE_CATALOGUE
+     */
+    private int _type;
+    private string _guid;
+    private string _content;
+
+    public string Guid { get => _guid; set => _guid = value; }
+    public string Content { get => _content; set => _content = value; }
+    public int Type { get => _type; set => _type = value; }
+}
+
+public class EnveloppeEnvoieFichier
+{
+    /* 
+        type 3 ENVOIE_FICHIER
+     */
+    private int _type;
+    private string _guid;
+    private string _content;
+
+    public string Guid { get => _guid; set => _guid = value; }
+    public string Content { get => _content; set => _content = value; }
+    public int Type { get => _type; set => _type = value; }
+}
+```
 
