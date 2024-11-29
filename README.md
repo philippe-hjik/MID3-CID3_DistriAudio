@@ -3,7 +3,7 @@
 ## Sommaire
 - [Se connecter au broker MQTT avec le topic `test`](#Étape-1)
   
-- [Déteter une demande de catalogue sur le topic et y répondre](#Étape-2)
+- [Détecter une demande de catalogue sur le topic et y répondre](#Étape-2)
   
 - [Créer un bouton pour demander des catalogues avec un message MQTT](#Étape-3)
   
