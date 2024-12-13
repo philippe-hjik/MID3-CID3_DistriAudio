@@ -278,3 +278,18 @@ private void ReiceiveMessage(MqttApplicationMessageReceivedEventArgs message)
             } 
         }
 ```
+
+## Étape 5
+Créer une interface pour sérialisez
+```csharp
+using System.Text.Json;
+namespace WinFormsSaucisseau.Classes.Interfaces
+{
+    public interface IJsonSerializableMessage
+    {
+        public string ToJson();
+    }
+}
+
+```
+
