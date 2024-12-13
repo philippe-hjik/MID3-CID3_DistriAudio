@@ -116,33 +116,17 @@ Créer un bouton pour demander des catalogues avec un message MQTT
 
 private async void SendData(string data)
 {
-    // Create a MQTT client instance
-    var mqttClient = factory.CreateMqttClient();
-
-    // Create MQTT client options
-    var options = new MqttClientOptionsBuilder()
-        .WithTcpServer(broker, port) // MQTT broker address and port
-        .WithCredentials(username, password) // Set username and password
-        .WithClientId(clientId)
-        .WithCleanSession()
-        .Build();
-
-    // Connectez-vous au broker MQTT
-    var connectResult = await mqttClient.ConnectAsync(options);
-
+    // Créez le message à envoyer
     var message = new MqttApplicationMessageBuilder()
-        .WithTopic(topic)
-        .WithPayload(data)
-        .WithQualityOfServiceLevel(MqttQualityOfServiceLevel.AtLeastOnce)
-        .WithRetainFlag()
-        .Build();
+    .WithTopic(topic)
+    .WithPayload(data)
+    .WithQualityOfServiceLevel(MqttQualityOfServiceLevel.AtLeastOnce)
+    .WithRetainFlag(false)
+    .Build();
 
-    await mqttClient.PublishAsync(message);
-    await Task.Delay(1000); // Wait for 1 second
-
-    mqttClient.UnsubscribeAsync(topic);
-    mqttClient.DisconnectAsync();
-
+    // Envoyez le message
+     mqttClient.PublishAsync(message);
+    Console.WriteLine("Message sent successfully!");
 }
         
 private async void button1_Click_1(object sender, EventArgs e)
