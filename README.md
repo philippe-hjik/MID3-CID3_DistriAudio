@@ -279,8 +279,8 @@ private void ReiceiveMessage(MqttApplicationMessageReceivedEventArgs message)
         }
 ```
 
-## Étape 5
-Créer une interface pour sérialisez
+Créer une interface pour accepter les message (Tiago et Melly)
+> créer une nouvelle classe IJsonSerializableMessage.cs
 ```csharp
 using System.Text.Json;
 namespace WinFormsSaucisseau.Classes.Interfaces
