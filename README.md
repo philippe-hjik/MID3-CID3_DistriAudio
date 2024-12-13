@@ -8,6 +8,7 @@
 - [Créer un bouton pour demander des catalogues avec un message MQTT](#Étape-3)
   
 - [Création de classes selon le type de message](#Étape-4)
+- [Créer une interface](###Créer-une-interface-pour-accepter-les-message-(Tiago-et-Melly))
 
 ## Info
 >[!IMPORTANT]
@@ -279,7 +280,7 @@ private void ReiceiveMessage(MqttApplicationMessageReceivedEventArgs message)
         }
 ```
 
-Créer une interface pour accepter les message (Tiago et Melly)
+### Créer une interface pour accepter les message (Tiago et Melly)
 > créer une nouvelle classe IJsonSerializableMessage.cs
 ```csharp
 using System.Text.Json;
