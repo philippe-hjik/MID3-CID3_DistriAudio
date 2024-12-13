@@ -253,4 +253,44 @@ public class EnveloppeEnvoieFichier
     public int Type { get => _type; set => _type = value; }
 }
 ```
+### Exemple d'utilisation de l'énum
+Ici lorsqu'on reçoit un message, on va regarder le type de l'enveloppe générique, pour trier
 
+```csharp
+
+private void ReiceiveMessage(MqttApplicationMessageReceivedEventArgs message)
+        {
+            try
+            {
+                Debug.Write(Encoding.UTF8.GetString(message.ApplicationMessage.Payload));
+                GenericEnvelope enveloppe = JsonSerializer.Deserialize<GenericEnvelope>(Encoding.UTF8.GetString(message.ApplicationMessage.Payload));
+                if (enveloppe.SenderId == clientId) return;
+                switch (enveloppe.MessageType)
+                {
+                    case MessageType.ENVOIE_CATALOGUE:
+                    {
+                        EnvoieCatalogue enveloppeEnvoieCatalogue = JsonSerializer.Deserialize<EnvoieCatalogue>(enveloppe.EnveloppeJson);
+                        break;
+                    }
+                    case MessageType.DEMANDE_CATALOGUE:
+                    {
+                        EnvoieCatalogue envoieCatalogue = new EnvoieCatalogue();
+                        envoieCatalogue.Content = _maListMediaData;
+                        SendMessage(mqttClient, MessageType.ENVOIE_CATALOGUE, clientId, envoieCatalogue, "test");
+                        break;
+                    }
+                    case MessageType.ENVOIE_FICHIER:
+                    {
+                        EnvoieFichier enveloppeEnvoieFichier = JsonSerializer.Deserialize<EnvoieFichier>(enveloppe.EnveloppeJson);
+                        break;
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            } 
+        }
+```
