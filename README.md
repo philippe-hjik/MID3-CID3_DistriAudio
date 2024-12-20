@@ -202,26 +202,12 @@ public class GenericEnvelope
         /*
             type 1
         */
-        private int _type;
-        private string _guid;
         private List<MediaData> _content;
 
         public List<MediaData>? Content
         {
             get => _content;
             set => _content = value;
-        }
-
-        public int Type
-        {
-            get => _type;
-            set => _type = value;
-        }
-
-        public string Guid
-        {
-            get => _guid;
-            set => _guid = value;
         }
 
         public string ToJson()
@@ -235,21 +221,7 @@ public class GenericEnvelope
         /*
             type 2
         */
-        private int _type;
-        private string _guid;
         private string _content;
-
-        public int Type
-        {
-            get => _type;
-            set => _type = value;
-        }
-
-        public string Guid
-        {
-            get => _guid;
-            set => _guid = value;
-        }
 
         public string Content
         {
@@ -268,22 +240,7 @@ public class GenericEnvelope
         /*
             type 3
         */
-        private int _type;
-        private string _guid;
         private string _content;
-
-        public int Type
-        {
-            get => _type;
-            set => _type = value;
-        }
-
-        public string Guid
-        {
-            get => _guid;
-            set => _guid = value;
-        }
-
         public string Content
         {
             get => _content;
@@ -301,33 +258,12 @@ public class GenericEnvelope
         /*
             type 4
         */
-        private int _type;
-        private string _guid;
-        private string _personnal_topic;
         private string _file_name;
-
-        public int Type
-        {
-            get => _type;
-            set => _type = value;
-        }
-
-        public string Guid
-        {
-            get => _guid;
-            set => _guid = value;
-        }
 
         public string FileName
         {
             get => _file_name;
             set => _file_name = value;
-        }
-
-        public string PersonnalTopic
-        {
-            get => _personnal_topic;
-            set => _personnal_topic = value;
         }
 
         public string ToJson()
