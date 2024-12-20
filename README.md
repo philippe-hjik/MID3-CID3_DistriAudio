@@ -240,11 +240,19 @@ public class GenericEnvelope
         /*
             type 3
         */
+        private MediaData _fileInfo;
         private string _content;
+
         public string Content
         {
             get => _content;
             set => _content = value;
+        }
+
+        public MediaData FileInfo
+        {
+            get => _fileInfo;
+            set => _fileInfo = value;
         }
 
         public string ToJson()
