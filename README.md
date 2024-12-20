@@ -173,7 +173,8 @@ public enum MessageType
 {
     ENVOIE_CATALOGUE,
     DEMANDE_CATALOGUE,
-    ENVOIE_FICHIER
+    ENVOIE_FICHIER,
+    DEMANDE_FICHIER,
 }
 ```
 
@@ -196,47 +197,144 @@ public class GenericEnvelope
 #### Classes Enveloppes
 > Les classes enveloppe en question
 ```csharp
-public class EnveloppeEnvoieCatalogue
-{
-    /* 
-        type 1 ENVOIE_CATALOGUE
-     */
-    private int _type;
-    private string _guid;
-    private List<MediaData> _content;
+    public class SendCatalog : IMessage
+    {
+        /*
+            type 1
+        */
+        private int _type;
+        private string _guid;
+        private List<MediaData> _content;
 
-    public string Guid { get => _guid; set => _guid = value; }
-    public List<MediaData> Content { get => _content; set => _content = value; }
-    public int Type { get => _type; set => _type = value; }
-}
+        public List<MediaData>? Content
+        {
+            get => _content;
+            set => _content = value;
+        }
 
-public class EnveloppeDemandeCatalogue
-{
-    /* 
-        type 2 DEMANDE_CATALOGUE
-     */
-    private int _type;
-    private string _guid;
-    private string _content;
+        public int Type
+        {
+            get => _type;
+            set => _type = value;
+        }
 
-    public string Guid { get => _guid; set => _guid = value; }
-    public string Content { get => _content; set => _content = value; }
-    public int Type { get => _type; set => _type = value; }
-}
+        public string Guid
+        {
+            get => _guid;
+            set => _guid = value;
+        }
 
-public class EnveloppeEnvoieFichier
-{
-    /* 
-        type 3 ENVOIE_FICHIER
-     */
-    private int _type;
-    private string _guid;
-    private string _content;
+        public string ToJson()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+    }
 
-    public string Guid { get => _guid; set => _guid = value; }
-    public string Content { get => _content; set => _content = value; }
-    public int Type { get => _type; set => _type = value; }
-}
+    public class AskCatalog : IMessage
+    {
+        /*
+            type 2
+        */
+        private int _type;
+        private string _guid;
+        private string _content;
+
+        public int Type
+        {
+            get => _type;
+            set => _type = value;
+        }
+
+        public string Guid
+        {
+            get => _guid;
+            set => _guid = value;
+        }
+
+        public string Content
+        {
+            get => _content;
+            set => _content = value;
+        }
+        
+        public string ToJson()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+    }
+
+    public class SendMusic : IMessage
+    {
+        /*
+            type 3
+        */
+        private int _type;
+        private string _guid;
+        private string _content;
+
+        public int Type
+        {
+            get => _type;
+            set => _type = value;
+        }
+
+        public string Guid
+        {
+            get => _guid;
+            set => _guid = value;
+        }
+
+        public string Content
+        {
+            get => _content;
+            set => _content = value;
+        }
+
+        public string ToJson()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+    }
+
+    public class AskMusic : IMessage
+    {
+        /*
+            type 4
+        */
+        private int _type;
+        private string _guid;
+        private string _personnal_topic;
+        private string _file_name;
+
+        public int Type
+        {
+            get => _type;
+            set => _type = value;
+        }
+
+        public string Guid
+        {
+            get => _guid;
+            set => _guid = value;
+        }
+
+        public string FileName
+        {
+            get => _file_name;
+            set => _file_name = value;
+        }
+
+        public string PersonnalTopic
+        {
+            get => _personnal_topic;
+            set => _personnal_topic = value;
+        }
+
+        public string ToJson()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+    }
 ```
 ### Exemple d'utilisation de l'énum
 Ici lorsqu'on reçoit un message, on va regarder le type de l'enveloppe générique, pour trier
@@ -283,13 +381,9 @@ private void ReiceiveMessage(MqttApplicationMessageReceivedEventArgs message)
 ### Créer une interface pour accepter les message (Tiago et Melly)
 > créer une nouvelle classe IJsonSerializableMessage.cs
 ```csharp
-using System.Text.Json;
-namespace WinFormsSaucisseau.Classes.Interfaces
+public interface IMessage
 {
-    public interface IJsonSerializableMessage
-    {
-        public string ToJson();
-    }
+    public string ToJson();
 }
 
 ```
